@@ -13,6 +13,32 @@
         </header>
 
         <main>
+            <!-- Interruptor Principal -->
+            <div class="power-control">
+                <div class="power-header">
+                    <h3 class="power-title">Estado de la Extensión</h3>
+                    <div class="power-switch-container">
+                        <label class="power-switch" for="extensionToggle">
+                            <input type="checkbox" id="extensionToggle" checked>
+                            <span class="power-slider"></span>
+                        </label>
+                        <span id="powerStatus" class="power-status active">ACTIVADO</span>
+                    </div>
+                </div>
+                <p class="power-description">Activa o desactiva todos los atajos de teclado y funcionalidades</p>
+            </div>
+
+            <!-- Control de Velocidad -->
+            <div class="speed-control" id="speedControlSection">
+                <label for="speedRange" class="speed-label">Velocidad de voz:</label>
+                <div class="speed-container">
+                    <span class="speed-text">Lenta</span>
+                    <input type="range" id="speedRange" min="0.5" max="2" step="0.5" value="1" class="speed-slider" aria-label="Control de velocidad de voz">
+                    <span class="speed-text">Rápida</span>
+                </div>
+                <div class="speed-value" id="speedValue">Normal</div>
+            </div>
+
             <div class="button-group">
                 <button id="captureText" class="action-button" aria-label="Hacer síntesis del texto seleccionado">
                     <span class="icon">📝</span>
@@ -41,7 +67,17 @@
         </main>
 
         <footer>
-            <p class="help-text">Presiona F1 para obtener ayuda en cualquier momento</p>
+            <div class="help-section">
+                <p class="help-text">Atajos de teclado:</p>
+                <div class="shortcuts-list">
+                    <span>F1: Ayuda</span> • <span>F2: Repetir</span> • <span>Esc: Parar</span>
+                </div>
+                <div class="shortcuts-list">
+                    <span>Ctrl+Shift+S: Síntesis</span> • <span>Ctrl+Shift+L: Leer</span>
+                </div>
+                <p class="help-text small">Doble clic en cualquier palabra para definición</p>
+                <p class="help-text small">💡 Usa el interruptor principal para activar/desactivar funciones</p>
+            </div>
         </footer>
     </div>
     <script src="tesseract.min.js"></script>

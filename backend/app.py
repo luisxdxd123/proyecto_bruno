@@ -265,11 +265,107 @@ def build_coherent_summary(sentences):
     
     return ". ".join(result)
 
+@app.route("/dictionary", methods=["POST"])
+def dictionary():
+    data = request.json
+    word = data.get("word", "").strip().lower()
+    
+    if not word:
+        return jsonify({"error": "No se proporcionó palabra."}), 400
+    
+    # Definir diccionario simple para 6to grado
+    definition = get_simple_definition(word)
+    
+    return jsonify({
+        "word": word,
+        "definition": definition,
+        "pronunciation": get_pronunciation_guide(word)
+    })
+
+def get_simple_definition(word):
+    """Diccionario simple adaptado para estudiantes de 6to grado"""
+    dictionary = {
+        # Ciencias Naturales
+        "célula": "La parte más pequeña de un ser vivo. Es como un pequeño ladrillo que forma el cuerpo.",
+        "átomo": "La parte más pequeña de cualquier cosa. Todo está hecho de átomos.",
+        "fotosíntesis": "El proceso donde las plantas usan la luz del sol para hacer su comida.",
+        "digestión": "El proceso donde el cuerpo convierte la comida en energía.",
+        "respiración": "El proceso de tomar aire para vivir.",
+        "ecosistema": "Un lugar donde viven plantas y animales juntos.",
+        "vertebrado": "Animal que tiene huesos en su espalda, como los humanos.",
+        "invertebrado": "Animal que no tiene huesos en su espalda, como los insectos.",
+        
+        # Matemáticas
+        "fracción": "Una parte de algo completo. Como media pizza o un cuarto de pastel.",
+        "decimal": "Un número que usa punto para mostrar partes, como 3.5",
+        "perímetro": "La distancia alrededor de una figura.",
+        "área": "El espacio que ocupa una figura plana.",
+        "volumen": "El espacio que ocupa un objeto en tres dimensiones.",
+        "ángulo": "El espacio entre dos líneas que se encuentran.",
+        "paralelo": "Líneas que nunca se tocan, como las vías del tren.",
+        "perpendicular": "Líneas que se cruzan formando una esquina perfecta.",
+        
+        # Geografía
+        "continente": "Una gran porción de tierra en el planeta. Hay 7 continentes.",
+        "océano": "Una gran extensión de agua salada.",
+        "meridiano": "Línea imaginaria que va del polo norte al polo sur.",
+        "paralelo": "Línea imaginaria que rodea la Tierra de este a oeste.",
+        "ecuador": "La línea que divide la Tierra en dos partes iguales.",
+        "clima": "El tiempo que hace normalmente en un lugar durante el año.",
+        "relieve": "Las diferentes formas del terreno: montañas, llanuras, valles.",
+        
+        # Historia
+        "civilización": "Un grupo de personas que viven organizadas con leyes y costumbres.",
+        "cultura": "La forma de vivir de un grupo de personas: su comida, música, tradiciones.",
+        "independencia": "Cuando un país deja de ser gobernado por otro país.",
+        "revolución": "Un gran cambio en la forma de gobernar un país.",
+        "conquista": "Cuando un grupo toma control de otro lugar por la fuerza.",
+        "colonia": "Un territorio controlado por otro país lejano.",
+        
+        # Español/Literatura
+        "sustantivo": "Palabra que nombra personas, animales, cosas o lugares.",
+        "adjetivo": "Palabra que describe cómo es algo o alguien.",
+        "verbo": "Palabra que indica una acción o lo que hace alguien.",
+        "sílaba": "Cada pedacito de sonido en que se divide una palabra.",
+        "sinónimo": "Palabras que significan lo mismo o algo parecido.",
+        "antónimo": "Palabras que significan lo contrario.",
+        "metáfora": "Comparar dos cosas sin usar 'como'. Ejemplo: Tus ojos son estrellas.",
+        "rima": "Cuando las palabras terminan con el mismo sonido.",
+    }
+    
+    # Buscar definición
+    definition = dictionary.get(word)
+    
+    if definition:
+        return definition
+    else:
+        # Si no está en nuestro diccionario, dar una respuesta genérica útil
+        return f"'{word}' es una palabra interesante. Te recomiendo preguntarle a tu maestro o buscar en un diccionario para aprender más sobre ella."
+
+def get_pronunciation_guide(word):
+    """Guía simple de pronunciación para palabras difíciles"""
+    pronunciation_guide = {
+        "fotosíntesis": "fo-to-SÍN-te-sis",
+        "ecosistema": "e-co-sis-TE-ma",
+        "vertebrado": "ver-te-BRA-do",
+        "invertebrado": "in-ver-te-BRA-do",
+        "perpendicular": "per-pen-dic-cu-LAR",
+        "civilización": "ci-vi-li-za-CIÓN",
+        "independencia": "in-de-pen-DEN-cia",
+        "revolución": "re-vo-lu-CIÓN",
+        "conquista": "con-QUIS-ta",
+        "metáfora": "me-TÁ-fo-ra"
+    }
+    
+    return pronunciation_guide.get(word, word.upper())
+
 @app.route("/speak", methods=["POST"])
 def speak():
     data = request.json
     text = data.get("text", "")
-    tts = gTTS(text, lang="es")
+    rate = data.get("rate", 1.0)  # Velocidad de voz
+    
+    tts = gTTS(text, lang="es", slow=(rate < 1.0))
     temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".mp3")
     tts.save(temp_file.name)
     temp_file.close()

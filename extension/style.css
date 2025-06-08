@@ -119,9 +119,16 @@ footer {
 }
 
 .action-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-    transform: none;
+    background-color: #ccc !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    opacity: 0.5 !important;
+    pointer-events: none !important;
+}
+
+.action-button:disabled:hover {
+    background-color: #ccc !important;
+    transform: none !important;
 }
 
 .status-message.success {
@@ -144,6 +151,211 @@ footer {
     .action-button {
         border: 2px solid white;
     }
+}
+
+/* Interruptor Principal */
+.power-control {
+    background: linear-gradient(135deg, #f5f5f5, #e8f5e8);
+    padding: 1.2rem;
+    border-radius: 12px;
+    margin-bottom: var(--spacing-unit);
+    border: 3px solid var(--primary-color);
+    box-shadow: 0 4px 8px rgba(46, 125, 50, 0.1);
+}
+
+.power-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.power-title {
+    margin: 0;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.power-switch-container {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.power-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+}
+
+.power-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.power-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 30px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.power-slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.power-switch input:checked + .power-slider {
+    background-color: var(--primary-color);
+    box-shadow: inset 0 2px 4px rgba(46, 125, 50, 0.3);
+}
+
+.power-switch input:checked + .power-slider:before {
+    transform: translateX(30px);
+    box-shadow: 0 2px 6px rgba(46, 125, 50, 0.3);
+}
+
+.power-status {
+    font-weight: bold;
+    font-size: 0.9rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    min-width: 80px;
+    text-align: center;
+}
+
+.power-status.active {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.power-status.inactive {
+    background-color: #666;
+    color: white;
+}
+
+.power-description {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--text-color);
+    opacity: 0.8;
+    font-style: italic;
+}
+
+/* Control de Velocidad */
+.speed-control {
+    background-color: #f5f5f5;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: var(--spacing-unit);
+    border: 2px solid var(--secondary-color);
+    transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.speed-control.disabled {
+    opacity: 0.5;
+    filter: grayscale(50%);
+    pointer-events: none;
+}
+
+.speed-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.speed-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.speed-slider {
+    flex: 1;
+    height: 8px;
+    background: var(--secondary-color);
+    border-radius: 4px;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.speed-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.speed-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+.speed-text {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+.speed-value {
+    text-align: center;
+    font-weight: bold;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+/* Atajos de teclado */
+.help-section {
+    text-align: center;
+}
+
+.shortcuts-list {
+    font-size: 0.8rem;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin: 0.3rem 0;
+    line-height: 1.4;
+}
+
+.shortcuts-list span {
+    background-color: var(--secondary-color);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-weight: bold;
+    color: white;
+}
+
+.help-text.small {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    color: var(--primary-color);
+    font-style: italic;
 }
 
 @media (prefers-reduced-motion: reduce) {

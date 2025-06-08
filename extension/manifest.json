@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Lector y Descripción IA",
+  "version": "1.0",
+  "description": "Captura, lee texto y describe imágenes con IA.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "tabs",
+    "desktopCapture",
+    "contextMenus",
+    "storage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png",
+    "default_title": "Lector y Descripción IA",
+    "default_popup_width": 600,
+    "default_popup_height": 800
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}

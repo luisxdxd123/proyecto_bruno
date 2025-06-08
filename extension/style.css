@@ -1,0 +1,153 @@
+:root {
+    --primary-color: #2E7D32;
+    --secondary-color: #81C784;
+    --text-color: #333333;
+    --background-color: #FFFFFF;
+    --button-hover: #1B5E20;
+    --error-color: #D32F2F;
+    --success-color: #388E3C;
+    --font-size-large: 1.25rem;
+    --font-size-medium: 1rem;
+    --spacing-unit: 1rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: var(--spacing-unit);
+    width: 500px;
+    min-height: 400px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-unit);
+}
+
+header {
+    text-align: center;
+    padding: var(--spacing-unit) 0;
+}
+
+h1 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: var(--text-color);
+    font-size: var(--font-size-medium);
+    opacity: 0.8;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: var(--spacing-unit) 0;
+}
+
+.action-button {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: var(--font-size-large);
+    transition: all 0.3s ease;
+    width: 100%;
+    text-align: left;
+}
+
+.action-button:hover {
+    background-color: var(--button-hover);
+    transform: translateY(-2px);
+}
+
+.action-button:focus {
+    outline: 3px solid var(--secondary-color);
+    outline-offset: 2px;
+}
+
+.icon {
+    font-size: 1.5rem;
+}
+
+.status-container {
+    margin-top: var(--spacing-unit);
+}
+
+.status-message {
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    min-height: 2rem;
+}
+
+.progress-bar {
+    height: 4px;
+    background-color: var(--secondary-color);
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+footer {
+    margin-top: auto;
+    text-align: center;
+    padding: var(--spacing-unit) 0;
+}
+
+.help-text {
+    color: var(--text-color);
+    opacity: 0.7;
+    font-size: 0.9rem;
+}
+
+.action-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.status-message.success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.status-message.error {
+    background-color: var(--error-color);
+    color: white;
+}
+
+@media (prefers-contrast: high) {
+    :root {
+        --primary-color: #000000;
+        --text-color: #FFFFFF;
+        --background-color: #000000;
+    }
+    
+    .action-button {
+        border: 2px solid white;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}

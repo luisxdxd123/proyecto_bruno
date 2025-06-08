@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Visión Inclusiva - Asistente de Lectura</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Visión Inclusiva</h1>
+            <p class="subtitle">Tu asistente de lectura y descripción de imágenes</p>
+        </header>
+
+        <main>
+            <div class="button-group">
+                <button id="captureText" class="action-button" aria-label="Hacer síntesis del texto seleccionado">
+                    <span class="icon">📝</span>
+                    <span class="button-text">Síntesis de texto seleccionado</span>
+                </button>
+
+                <button id="describeImage" class="action-button" aria-label="Describir imagen seleccionada">
+                    <span class="icon">🖼</span>
+                    <span class="button-text">Describir imagen</span>
+                </button>
+
+                <button id="readText" class="action-button" aria-label="Leer texto seleccionado">
+                    <span class="icon">🔊</span>
+                    <span class="button-text">Leer texto seleccionado</span>
+                </button>
+            </div>
+
+            <div class="status-container">
+                <div id="status" class="status-message" role="status" aria-live="polite"></div>
+                <button id="listenDescription" class="action-button" style="display:none;margin-top:10px;" aria-label="Escuchar descripción">
+                    <span class="icon">🔊</span>
+                    <span class="button-text">Escuchar descripción</span>
+                </button>
+                <div id="progress" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </main>
+
+        <footer>
+            <p class="help-text">Presiona F1 para obtener ayuda en cualquier momento</p>
+        </footer>
+    </div>
+    <script src="tesseract.min.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html>
